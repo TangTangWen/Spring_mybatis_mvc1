@@ -13,6 +13,7 @@
     <title>帖子详情页</title>
 </head>
 <body>
+xingzheng
 <form action="/demol" method="post">
     分类:<select>
     <option value="0">wang</option>
