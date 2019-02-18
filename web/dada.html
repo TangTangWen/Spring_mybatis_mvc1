@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+</head>
+<body>
+
+<p id="test">hello world</p>
+<input id="btn" type="button" value="click test"/>
+<p id="p1"></p>
+<!---->
+<table id="#tab" border="1">
+    <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>价格</th>
+        <th>产地</th>
+    </tr>
+</table>
+
+</body>
+</html>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                type:"post",
+                url:"http://localhost:8080/showDemol",
+                data:{},
+                dataType:"json",
+                async:true,
+                success: function(data){
+                    var tbody="";
+                    for (var i = 0; i < data.length; i++) {
+                       var tr="<tr><td>"+JSON.stringify(data[i].id)+"</td><td>"+JSON.stringify(data[i].name)+"</td><td>"+JSON.stringify(data[i].price)+"</td><td>"+JSON.stringify(data[i].production)+"</td></tr>";
+                       tbody=tbody+tr;
+                    }
+                    alert(tbody);
+                    alert(JSON.stringify(data.name))
+                    $("#p1").html(data.id + "," + data.name + "," + data.production +"," + data.price)
+                }
+            })
+        })
+
+    })
+</script>

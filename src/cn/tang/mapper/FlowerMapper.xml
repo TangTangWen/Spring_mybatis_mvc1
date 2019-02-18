@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tang.mapper.FlowerMapper">
+    <select id="selByFlower" resultType="flower" parameterType="map">
+        select * from flower
+        <where>
+            <if test="production!=null and production!=''">
+                <bind name="production" value="'%'+production+'%'"></bind>
+                and production like #{production}
+            </if>
+            <if test="name!=null and name!=''">
+                <bind name="name" value="'%'+name+'%'"></bind>
+                and name like #{name}
+            </if>
+        </where>
+        limit #{start},#{pageSize}
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        select count(*) from flower
+        <where>
+            <if test="production!=null and production!=''">
+                <bind name="production" value="'%'+production+'%'"></bind>
+                and production like #{production}
+            </if>
+            <if test="name!=null and name!=''">
+                <bind name="name" value="'%'+name+'%'"></bind>
+                and name like #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="selAll" resultType="flower">
+        select * from flower
+    </select>
+</mapper>
